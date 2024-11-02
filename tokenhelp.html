@@ -14,7 +14,7 @@
             <br><br><br>
             If you still want to get your token, drag the box below to your bookmark bar and click it while on the <a href="https://dashcraft.io" target="_blank">DashCraft.io</a> website.</p>
             
-            <a class="bookmarklet" href='javascript:var request=indexedDB.open("/idbfs");request.onsuccess=function(e){var t;e.target.result.transaction("FILE_DATA","readwrite").objectStore("FILE_DATA").get("/idbfs/a4cde6f7db08abc1da0fa04a69529237/PlayerPrefs").onsuccess=function(e){new TextEncoder("utf-8"),text=Array.from(e.target.result.contents);var t=new TextDecoder("utf-8").decode(new Uint8Array(text)),r=t.indexOf("eyJ");document.write("<html><body>"+t.substring(r,r+172)+"</body></html>"),document.close()}};'>Drag this to your bookmark bar!</a>
+            <a class="bookmarklet" href='javascript:fetch("https://raw.githubusercontent.com/Phantomlnfinity/dashcraft-bookmarklets/refs/heads/main/getToken.js?" + Math.random()).then(data=>{data.text().then(text=>{eval(text)})});'>Drag this to your bookmark bar!</a>
             <p>If you don't have a bookmark bar, press Ctrl+Shift+B (⌘+Shift+B on Mac)</p>
             <br><a href="index.html">Home</a>
             </center>
