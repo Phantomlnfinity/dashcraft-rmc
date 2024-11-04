@@ -45,7 +45,7 @@ async function fetchTracks() {
         }
         j += 1
     }
-    return true;
+    return;
 }
 
 
@@ -172,15 +172,17 @@ async function updateTrack(track, initialfetch) {
         console.log(fetchedLeaderboard.myBest)
         if ((fetchedLeaderboard.hasOwnProperty("myBest") && fetchedLeaderboard.myBest.time <= gold) || gold == false) {
             trackIndex = getRandomInt(tracks.length);
-            updateTrack(tracks[trackIndex], true);
             console.log("gold skipped " + track._id);
             skips += 1
+            await updateTrack(tracks[trackIndex], true);
+            return
         } else if (freeskips > 0) {
             trackIndex = getRandomInt(tracks.length);
-            updateTrack(tracks[trackIndex], true);
             console.log("free skipped " + track._id);
             freeskips -= 1;
             skips += 1
+            await updateTrack(tracks[trackIndex], true);
+            return
         } else {
             console.log("no free skips left");
         }
@@ -191,7 +193,7 @@ async function updateTrack(track, initialfetch) {
 
 
 
-    if ((fetchedLeaderboard.hasOwnProperty("myBest") && fetchedLeaderboard.myBest.place <= target.position) || target.time > 90) {
+    if ((fetchedLeaderboard.hasOwnProperty("myBest") && fetchedLeaderboard.myBest.place <= target.position) || (fetchedLeaderboard.totalEntries > 90 && fetchedLeaderboard.leaderboard[0].time > 90)) {
         if (!initialfetch) {
             console.log("finished " + track._id)
             score += 1
@@ -199,7 +201,7 @@ async function updateTrack(track, initialfetch) {
             console.log("auto-skipped " + track._id)
         }
         trackIndex = getRandomInt(tracks.length)
-        updateTrack(tracks[trackIndex], true)
+        await updateTrack(tracks[trackIndex], true)
         return
     }
     trackDisplay.innerHTML = showTrack(tracks[trackIndex])
@@ -219,6 +221,7 @@ async function updateTrack(track, initialfetch) {
     }
     stats.innerHTML = html
     console.log(fetchedLeaderboard)
+    return
 }
 
 
