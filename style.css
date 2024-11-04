@@ -4,7 +4,9 @@
     color: lightgrey;
     scrollbar-color: grey black;
     scrollbar-width: none;
-    font-family:Arial, Helvetica, sans-serif
+    font-family:Arial, Helvetica, sans-serif;
+
+    align-content: center;
   }
   
   body {
@@ -19,7 +21,7 @@
   }
 
   p {
-    width: min(100%, 500px)
+    width: min(80%, 600px)
   }
 
   a {
@@ -66,19 +68,23 @@
   }
   
   button {
-    background-color: black;
+    background-color: lightgrey;
     border: none;
-    color: white;
+    color: black;
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     border-radius: 10px;
     font-size: 16px;
     margin: 4px 2px;
-    margin-top: 0px;
     margin-right: 20px;
     cursor: pointer;
-    float: left;
+
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    box-shadow: 0 5px #999;
   }
   
   tr {
@@ -94,26 +100,29 @@
   
   
   
-  button:hover {background-color: rgb(50,50,50)}
+  button:hover {background-color: rgb(180,180,180)}
   button:active {
     background-color: rgb(50,50,50);
     box-shadow: 0 3px #666;
     transform: translateY(2px);
   }
   
+  #info {
+    float: left;
+    width: 49%;
+  }
+
+  #rmc {
+    width: min(635px, 80%);
+  }
   
-  .topstuff {
-    max-width: fit-content;
+  .centered {
+    max-width: 80%;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
-  }
-  button {
-    color: lightgrey;
-    background-color: black;
-    box-shadow: 0 5px #999;
-    margin-top: -5px;
+    float: center;
   }
   
   
@@ -196,14 +205,26 @@
   
   
   
-  
+  .important {
+    background-color: lightgrey; 
+    border-radius: 10px; 
+    border-width: 0px; 
+    padding: 5px; 
+    color: black; 
+    text-decoration: none; 
+    user-select: none;
+    margin-bottom: 10px;
+  }
   
   
   div.gallery {
-    margin: 0px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
     border: 1px solid #ccc;
     float: left;
-    width: calc(20% - 2px);
+    width: 45%
+
+    
   }
   
   div.gallery:hover {
@@ -212,7 +233,7 @@
   
   div.gallery img {
     width: 100%;
-    height: 11.25vw;
+   
   }
   
   div.desc {

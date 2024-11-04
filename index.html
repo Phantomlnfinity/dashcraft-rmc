@@ -1,17 +1,37 @@
 <!DOCTYPE html>
     <html>
         <head>
-            <title>RMC</title>
-            <script src="script.js"></script>
             <link rel="stylesheet" href="style.css">
+            <title>RMC</title>
         </head>
 
         <body>
 
             <h1>Random Map Challenge</h1>
+            <div id="setup">
+                <textarea id="tokenInput" maxlength=172 style="width: 635px; resize: none;" rows=2 placeholder="Account token"></textarea>
+                <br>
+                <a href="tokenhelp.html">Click here if you don't have your account token</a>
+                <br>
+                <div id="errormessage"><br></div>
+                <br>
+                <button type="button" onclick="startRMC()">Start RMC</button>   
+            </div> 
+
+            <div id="rmc" class = centered hidden>
+                <div class="gallery" id="trackDisplay"></div>
+                <div id="info">
+                    <div id="timer" class="important"></div>
+                    <div id="score" class="important"></div>
+                    <div id="stats" class="important"></div> 
+                    <br>
+                    <button type="button" onclick="skipping = true" style="width:100%">Skip</button>
+                </div>
+            </div>
+
+
+
             
-
-            <a href="tokenhelp.html">Click here if you don't have your account token</a>
-
+            <script src="script.js"></script>
         </body>
     </html>
