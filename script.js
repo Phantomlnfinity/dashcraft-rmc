@@ -24,8 +24,8 @@ async function fetchTracks() {
     let j = 0;
     while (done == false) {
         let fetches = [];
-        // for (let i = 0; i < 50; i++) {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 50; i++) {
+        // for (let i = 0; i < 10; i++) {
             fetches.push(
                 fetch("https://api.dashcraft.io/trackv2/global3?sort=new&verifiedOnly=false&page=" + (j * 50 + i) + "&pageSize=50")
                 .then((response) => response.json())
@@ -36,7 +36,7 @@ async function fetchTracks() {
                 }));
         }
         const result = await Promise.all(fetches)
-        done = true
+        // done = true
         if (result[result.length - 1].length < 50) {
             done = true
         }
@@ -110,7 +110,7 @@ async function startRMC() {
         clock = setInterval(function() {
             timeInSeconds = totalTime - Math.round((Date.now() - startTime)/1000);
             timer.innerHTML = Math.floor(timeInSeconds/60).toString().padStart(2, '0') + ":" + (timeInSeconds%60).toString().padStart(2, '0');
-            scoreCounter.innerHTML = "Points: " + score + "<br>Skips: " + skips
+            scoreCounter.innerHTML = "Points: " + score + "<br>Skips: " + skips + "<br>Free skips remaining: " + freeskips
 
             if (Math.round(timeInSeconds) <= 0) {
                 timer.innerHTML = "00:00"
