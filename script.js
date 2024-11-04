@@ -101,7 +101,7 @@ function playerHTML(playerdata) {
 
 async function startRMC() {
     if (validToken == true) {
-        setup.hidden = false;
+        setup.hidden = true;
         await fetchTracks();
 
         rmcdiv.hidden = false;

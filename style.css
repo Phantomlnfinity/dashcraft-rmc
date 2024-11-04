@@ -102,7 +102,7 @@
   
   button:hover {background-color: rgb(180,180,180)}
   button:active {
-    background-color: rgb(180,180,180)
+    background-color: rgb(180,180,180);
     box-shadow: 0 3px #666;
     transform: translateY(2px);
   }
