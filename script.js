@@ -174,6 +174,7 @@ async function updateTrack(track, initialfetch) {
             trackIndex = getRandomInt(tracks.length);
             console.log("gold skipped " + track._id);
             skips += 1
+            skipping = false;
             await updateTrack(tracks[trackIndex], true);
             return
         } else if (freeskips > 0) {
@@ -181,19 +182,19 @@ async function updateTrack(track, initialfetch) {
             console.log("free skipped " + track._id);
             freeskips -= 1;
             skips += 1
+            skipping = false;
             await updateTrack(tracks[trackIndex], true);
             return
         } else {
             console.log("no free skips left");
         }
-        skipping = false;
     }
     
 
 
 
 
-    if ((fetchedLeaderboard.hasOwnProperty("myBest") && fetchedLeaderboard.myBest.place <= target.position) || (fetchedLeaderboard.totalEntries > 90 && fetchedLeaderboard.leaderboard[0].time > 90)) {
+    if ((fetchedLeaderboard.hasOwnProperty("myBest") && fetchedLeaderboard.myBest.place <= target.position) || (fetchedLeaderboard.totalEntries > 0 && fetchedLeaderboard.leaderboard[0].time > 90)) {
         if (!initialfetch) {
             console.log("finished " + track._id)
             score += 1
