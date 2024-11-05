@@ -15,8 +15,16 @@ let trackIndex = 0;
 let score = 0;
 let freeskips = 1;
 let skips = 0;
+let trackStart = Date.now();
+let startTime = Date.now();
+
+let brokenSkips = [];
 
 let skipping = false;
+let brokenSkip = false;
+
+
+window.onbeforeunload = function() {if (!rmcdiv.hidden) {return true}}
 
 
 async function fetchTracks() {
@@ -36,7 +44,7 @@ async function fetchTracks() {
                 }));
         }
         const result = await Promise.all(fetches)
-        // done = true
+        done = true
         if (result[result.length - 1].length < 50) {
             done = true
         }
@@ -107,7 +115,7 @@ async function startRMC() {
         rmcdiv.hidden = false;
         tokenInput.readOnly = true;
         console.log(tokenInput.value);
-        const startTime = Date.now();
+        startTime = Date.now();
         clock = setInterval(function() {
             timeInSeconds = totalTime - Math.round((Date.now() - startTime)/1000);
             timer.innerHTML = Math.floor(timeInSeconds/60).toString().padStart(2, '0') + ":" + (timeInSeconds%60).toString().padStart(2, '0');
@@ -135,6 +143,10 @@ async function startRMC() {
 
 
 async function updateTrack(track, initialfetch) {
+
+    if (initialfetch) {
+        trackStart = Date.now();
+    }
     
     leaderboardFetch = fetch("https://api.dashcraft.io/trackv2/" + track._id + "/leaderboard", { 
         headers: {
@@ -166,6 +178,18 @@ async function updateTrack(track, initialfetch) {
     }
 
 
+    if (brokenSkip) {
+        brokenSkip = false
+        if (fetchedLeaderboard.totalEntries == 0 || fetchedLeaderboard.leaderboard[0].drivingVersion != "2.0.0") {
+            trackIndex = getRandomInt(tracks.length);
+            console.log("broken skipped " + track._id);
+            brokenSkips.push(track._id)
+            skipping = false;
+            startTime += Date.now() - trackStart
+            await updateTrack(tracks[trackIndex], true);
+            return
+        }
+    }
 
 
     if (skipping) {

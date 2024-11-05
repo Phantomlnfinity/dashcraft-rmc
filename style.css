@@ -216,15 +216,15 @@
     margin-bottom: 10px;
   }
   
-  
-  div.gallery {
+  .left {
     margin-left: 2.5%;
     margin-right: 2.5%;
-    border: 1px solid #ccc;
     float: left;
-    width: 45%
+    width: 45%;
+  }  
 
-    
+  div.gallery {
+    border: 1px solid #ccc;
   }
   
   div.gallery:hover {
