@@ -17,6 +17,7 @@ let freeskips = 1;
 let skips = 0;
 let trackStart = Date.now();
 let startTime = Date.now();
+let timeoutId
 
 let brokenSkips = [];
 
@@ -119,7 +120,7 @@ async function startRMC() {
         clock = setInterval(function() {
             timeInSeconds = totalTime - Math.round((Date.now() - startTime)/1000);
             timer.innerHTML = Math.floor(timeInSeconds/60).toString().padStart(2, '0') + ":" + (timeInSeconds%60).toString().padStart(2, '0');
-            scoreCounter.innerHTML = "Points: " + score + "<br>Skips: " + skips + "<br>Free skips remaining: " + freeskips
+            scoreCounter.innerHTML = "Points: " + score + "<br>Used skips: " + skips + "<br>Free skips remaining: " + freeskips
 
             if (Math.round(timeInSeconds) <= 0) {
                 timer.innerHTML = "00:00"
@@ -135,8 +136,17 @@ async function startRMC() {
         await updateTrack(tracks[trackIndex], true)
         while (Date.now() - startTime < totalTime * 1000) {
             sleep = new Promise(resolve => setTimeout(resolve, 5000))
+            buttonPromise = new Promise((resolve) => {
+            
+                document.getElementById('skipbutton').addEventListener('click', () => {
+                   resolve('Button clicked!');
+                });
+                document.getElementById('brokenskipbutton').addEventListener('click', () => {
+                    resolve('Button clicked!');
+                  });
+              });
             await updateTrack(tracks[trackIndex], false)
-            await sleep;
+            await Promise.any([sleep, buttonPromise]);
         }
     }
 }
