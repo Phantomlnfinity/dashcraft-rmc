@@ -239,8 +239,8 @@ async function updateTrack(track, initialfetch) {
 
 
 
-    if ((fetchedLeaderboard.hasOwnProperty("myBest") && fetchedLeaderboard.myBest.place <= target.position) || (fetchedLeaderboard.totalEntries > 0 && fetchedLeaderboard.leaderboard[0].time > 90)) {
-        if (!initialfetch) {
+    if ((fetchedLeaderboard.hasOwnProperty("myBest") && fetchedLeaderboard.myBest.place <= target.position) || (fetchedLeaderboard.totalEntries > 0 && (fetchedLeaderboard.leaderboard[0].time > 90 || fetchedLeaderboard.leaderboard[0].time < 5))) {
+        if (!initialfetch) { 
             console.log("finished " + track._id)
             score++
             code.score++
