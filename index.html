@@ -34,11 +34,30 @@
                 </div>
             </div>
 
+            <div id="results" class="centered" hidden>
+                <div class="left">
+                    <div class="important">
+                        Congrats on finishing your run! 
+                        <br><br>If you want your result to be counted for the event, press the button below to copy your result and send it in #events or DM it to Phantom along with a screenshot of this screen.
+                    </div>
+                    
+                </div>
+                <div id="info">
+                    <div class="important" id="resultDisplay">
+                        Points: 0
+                        <br>Skips used: 0
+                        <br>Broken tracks skipped: 0
+                    </div>
+                    <br>
+                    <button type="button" onclick="navigator.clipboard.writeText('```' + btoa(JSON.stringify(code)) + '```')" style="float:left;margin-top: 12px;width:100%">Copy result code (warning: long)</button>
+                </div>
+            </div>
+
 
             <body onbeforeunload="true"></body>
 
 
-            
+
             <script src="script.js"></script>
         </body>
     </html>
